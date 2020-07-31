@@ -1,0 +1,60 @@
+body { 
+    padding: 15px; 
+    background:#eee; 
+    font-family: Arial, Helvetica, sans-serif 
+}
+
+header{
+    background-color: rgb(31, 216, 216);
+    border:  gray solid 2px;
+    width: 1200px;
+    height: 80px;
+    display: inline-block;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+     .container{
+         width: 1200px;
+         height: 400px;
+         border: gray solid 2px;
+         display: inline-block;
+         margin-left: auto;
+         margin-right: auto;
+        display: flex;
+     }
+
+     .box-1{
+         
+         width: 250px;
+         border: rgb(208, 255, 0) solid 1px;
+         background-color: darkcyan;
+     }
+     .box-2{
+    
+        width: 800px;
+        margin-left: 25px;
+        margin-right: 25px;
+        border: rgb(208, 255, 0) solid 1px;
+        background-color: rgb(21, 0, 139);
+    }
+    .box-3{
+        
+        width: 100px;
+        border: rgb(208, 255, 0) solid 1px;
+        background-color: rgb(8, 7, 68);
+    }
+
+    h2{
+    
+    }
+    
+    @media (min-width: 460px){
+        /* regras de CSS */
+    }
+    @media (max-width: 960px){
+        /* regras de CSS */
+    }
+    @media (max-width: 768px) and (orientation: portrait){
+        /* regras de CSS */
+    }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+
+<!-- outra forma de utilizar css no projeto - 2º Por ordem de precedencia
+vem primeiro que o arquivo externo-->
+    <style>
+        body {
+    font-family: sans-serif;
+    text-align: center;
+    }
+    </style>
+
+    <title>Document</title>
+</head>
+<body style="background-color: red;"><!-- MAIOR precedencia
+    vem primeiro que o arquivo externo-->
+
+    <h1>Título Principal </h1>
+    <h2>Subtítulo</h2>
+    <h3>Outro subtítulo</h3>
+    <h4>Mais um</h4>
+    <h5>Outro, porque nao? </h5>
+    <h6>Agora sim, o último</h6>
+    <p> 
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, et dolore magna aliqua. 
+    </p>
+    <p> 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+    </p>
+    <ol start="10"> <!-- type = 1 , A ,a , I, i , start = 10-->
+        <li>Item da lista</li>
+        <ul type="square"> <!-- type = circle, disc, square-->
+            <li>Item da lista</li>
+            <li>Item da lista</li>
+            <li>Item da lista</li>
+        </ul>
+        <li>Item da lista</li>
+        <li>Item da lista</li>
+    </ol>
+    <ul type="square"> <!-- type = circle, disc, square-->
+        <li>Item da lista</li>
+        <li>Item da lista</li>
+        <li>Item da lista</li>
+    </ul>
+</body>
+</html>

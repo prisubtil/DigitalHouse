@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Aula04</title>
+</head>
+
+<body>
+    <em> Texto que deve ser enfatizado </em>
+    <!--Efeito de italic-->
+
+    <mark> Texto que deverá ser realçado com fundo amarelo</mark>
+    <!--destaca com fundo amarelo-->
+
+    <cite> Citação de texto, como um livro, filme e etc.</cite>
+    <!--Efeito de italic-->
+
+    <abbr title=”World Wide Web Consortium”> W3C(Abreviação)</abbr>
+    <!--Abrevia o termo-->
+
+    <form action="" method="POST">
+        <input type="text" name="usuario" value="" required />
+
+        <input type=”radio” name=”estado_civil” value=”Solteiro”>
+        <!--Passo apenas 2 opcoes-->
+        <input type=”radio” name=”estado_civil” value=”Casado”>
+
+        <input type=”checkbox” name=”hobbies” value=”Surf”>
+        <!--Passo uma lista-->
+        <input type=”checkbox” name=”hobbies” value=”Música”>
+
+        <input type=”email” placeholder=”user@email.com” />
+        <!--O atributo placeholder permite que coloquemos um texto que servirá de ajuda para
+            o usuário preencher o campo com um exemplo do valor esperado.-->
+
+        <label for=""> Nome e sobrenome: </label>
+        <!--Rótulo / O atributo for indica a qual input esse label faz referência utilizando o mesma valor
+            que o id do input..-->
+
+        <select name=”país”>
+
+            <option value=”Ar”>Argentina</option>
+
+            <option value=”Br”>Brasil</option>
+
+            <option value=”Co”>Colômbia</option>
+
+        </select>
+        <!--Lista suspensa, também chamado de combobox, é utilizado para criar campos de
+                múltipla escolha com caixa e lista.-->
+
+        <textarea rows="" cols="" style="resize:none" name=”mensagem”> </textarea>
+        <!--Campo para escrever várias linhas de texto. Usado geralmente para a opção “sua
+                    mensagem” em um formulário.-->
+
+        <a href="#">Meu link</a>
+
+
+    </form>
+</body>
+
+</html>
