@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício-EventosJS</title>
+    <script src="js/eventos.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onclick="mudarFundo()">
+    <input type="button" value="Cumprimentar" onclick="cumprimentar()">
+    <input type="button" value="Alterar Fundo" onclick="alterarFundo()"><br>
+
+    <img src="imagem/tarde.png" onfocus="vendoImagem()">
+    <img id="noite" src="imagem/noite.png" onclick="clicandoNaImagem()">
+</body>
+</html>
