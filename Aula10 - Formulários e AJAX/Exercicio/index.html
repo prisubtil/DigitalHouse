@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício-Formulário</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script text="text/javascript">
+
+       function envio(){
+            
+            var name = document.getElementById('name').value;
+            var lastname = document.getElementById('lastname').value;
+            var gender = document.getElementById('gender').value;
+            var location = document.getElementById('location').value;
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var password_confirm = document.getElementById('password_confirm').value;
+
+            $.ajax({
+                method: "POST",
+                url: "http://localhost:3000/users",
+                data: { 
+                    "name": name,
+                    "lastname": lastname,
+                    "gender": gender,
+                    "location": location,
+                    "username": username,
+                    "password": password,
+                    "password_confirm": password_confirm
+                },
+                success: function(){
+                    alert("Dados inseridos com sucesso!");
+                },
+                error: function(){
+                    alert("Dados não inseridos!");
+                }
+            })
+          
+        }   
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+              <h3>Faça seu Cadastro!</h3>
+          </div>
+        </div>
+      </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 center">
+    
+    <form action="#" onsubmit="envio()">
+        <label>Primeiro Nome:</label>
+        <input type="text" value="" id="name"><br>
+        <label>Sobrenome:</label>
+        <input type="text" value="" id="lastname"><br>
+        <label>Gênero:</label>
+        Masculino: <input type="checkbox" value="masculino" id="gender"><br>
+        Feminino: <input type="checkbox" value="feminino" id="gender"><br>
+        Outro: <input type="checkbox" value="outro" id="gender"><br>
+        <label>País:</label>
+        <input type="text" value="" id="location"><br>
+        <label>Nome de usuário:</label>
+        <input type="text" value="" id="username"><br>
+        <label>Senha:</label>
+        <input type="text" value="" id="password"><br>
+        <label>Confirmação de Senha:</label>
+        <input type="text" value="" id="password-confirm"><br>
+        <button type="submit">Enviar</button>
+    </div>
+    <div class="col-md-4 center"></div>
+    <div class="col-md-4 center"></div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "Andrew",
+        "lastname": "Brian",
+        "gender": "Masculino",
+        "location": "USA",
+        "username": "username",
+        "password": "xxxx",
+        "password_confirm": "xxxx"
+      }
+    ]
+  }
