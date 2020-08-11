@@ -106,14 +106,12 @@ $(document).ready(function(){
         ganhador(pontos);
     }
     function ganhador(pontos){
-        if(pontos == -3){
-            var jogada_1 = $('#entrada_apelido_jogador_1').val();
-            alert(jogada_1 + ' é o vencedor');
-            $('.jogada').off();
-        } else if(pontos == 3){
-            var jogada_2 = $('#entrada_apelido_jogador_2').val();
-            alert(jogada_2 + ' é o vencedor');
-            $('.jogada').off();
+        if(points == -3) {
+            $('#title').html($('#player-1-name').val() + " ganhou");
+            $('.block').off();
+        } else if(points == 3) {
+            $('#title').html($('#player-1-name').val() + " ganhou");
+            $('.block').off();
         }
     }
 
