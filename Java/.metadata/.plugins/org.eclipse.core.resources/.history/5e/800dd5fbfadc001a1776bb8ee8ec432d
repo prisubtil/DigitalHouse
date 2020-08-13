@@ -1,0 +1,24 @@
+package main;
+
+public class Produto{
+	public String nome;
+	public double preco;
+	public int quantidade;
+	public int quantidadeAdicionada;
+	public int quantidadeRemovida;
+	
+	
+	public double valorTotalEmEstoque() {
+		return  preco*quantidade;
+		
+	}
+	
+	public int adicionarProduto(){
+		  return quantidade = quantidade + quantidadeAdicionada;
+		 
+	}
+	
+	public int removerProduto(){
+		return quantidade = quantidade - quantidadeRemovida;
+	}
+}

@@ -1,0 +1,18 @@
+package empregado;
+
+public class Empregado {
+	
+	public String nome;
+	public double salario;
+	public double imposto;
+	
+	
+	public double salarioLiquido() {
+		return salario - imposto;
+		
+	}
+	
+	public void aumentoDeSalario() {
+		 
+	}
+}
