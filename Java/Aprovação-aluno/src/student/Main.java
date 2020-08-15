@@ -16,15 +16,9 @@ public class Main {
 		st.note3 = sc.nextDouble();
 		System.out.println("FINAL GRADE: "+st.finalGrade());
 		
-		double sum = 0;
-		sum = st.finalGrade();
-		if(sum  > 6) {
-			System.out.println("PASS");
-			}else {
-				System.out.println("FAILED");
-		for(double i = sum; i==6;i++) {
-			System.out.println("MISSING "+i+"POINTS");	
-				}
-			}
+		st.missingPoint();
+		
+		
+	 sc.close();
 	}
 }
