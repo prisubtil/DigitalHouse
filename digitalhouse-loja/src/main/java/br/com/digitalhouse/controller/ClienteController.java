@@ -2,6 +2,7 @@ package br.com.digitalhouse.controller;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,13 +16,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import br.com.digitalhouse.model.Cliente;
 import br.com.digitalhouse.model.Telefone;
 import br.com.digitalhouse.service.ClienteService;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
+
 	@Autowired
 	private ClienteService service;
 	
@@ -85,14 +89,12 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Cliente> excluir(@PathVariable Long id) {
-		try {
+	public void excluir(@PathVariable Long id) {
+		
 			service.excluir(id);	
-			return ResponseEntity.noContent().build();
 			
-		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
-		}
+			
+	
 			
 //		} catch (Exception e) {
 //			return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -113,5 +115,6 @@ public class ClienteController {
 			
 		return ResponseEntity.notFound().build();
 	}
+
 	
 }

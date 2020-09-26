@@ -25,8 +25,10 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
+	
 	@Column
 	private String nome;	
+	
 	@Column
 	private String sobrenome;		
 	
@@ -39,14 +41,14 @@ public class Cliente {
 		
 	@Column
 	private String cpf;	
+	
 	@Column
 	private String rg;	
+	
 	@Column
 	private String email;
 	
 	@Embedded
 	private Endereco endereco;
-
-	
 	
 }
