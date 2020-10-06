@@ -1,6 +1,5 @@
-package br.com.digitalhouse.exception;
+package br.com.digitalhouse.exception.config;
 
-import java.nio.file.AccessDeniedException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +22,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.fasterxml.jackson.databind.JsonMappingException.Reference;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.PropertyBindingException;
+
+import br.com.digitalhouse.exception.BusinessException;
+import br.com.digitalhouse.exception.EntidadeNaoEncontradaException;
 
 
 @ControllerAdvice
@@ -84,35 +90,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	    
 	    return handleExceptionInternal(ex, problem, headers, status, request);
 	}
-	@ExceptionHandler(EntidadeNaoEncontradaException.class)
-	public ResponseEntity<?> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException ex,
-			WebRequest request) {
-		
-		HttpStatus status = HttpStatus.NOT_FOUND;
-		ProblemType problemType = ProblemType.RECURSO_NAO_ENCONTRADO;
-		String detail = ex.getMessage();
-		
-		Problem problem = createProblemBuilder(status, problemType, detail)
-				.userMessage(detail)
-				.build();
-		
-		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
-	}
-	
-	
-	@ExceptionHandler(BusinessException.class)
-	public ResponseEntity<?> handleNegocio(BusinessException ex, WebRequest request) {
-
-		HttpStatus status = HttpStatus.BAD_REQUEST;
-		ProblemType problemType = ProblemType.ERRO_NEGOCIO;
-		String detail = ex.getMessage();
-		
-		Problem problem = createProblemBuilder(status, problemType, detail)
-				.userMessage(detail)
-				.build();
-		
-		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
-	}
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Object> handleUncaught(Exception ex, WebRequest request) {
@@ -129,20 +106,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
 	
-	@ExceptionHandler(AccessDeniedException.class)
-	public ResponseEntity<?> handleEntidadeNaoEncontrada(AccessDeniedException ex, WebRequest request) {
-
-	    HttpStatus status = HttpStatus.FORBIDDEN;
-	    ProblemType problemType = ProblemType.ACESSO_NEGADO;
-	    String detail = ex.getMessage();
-
-	    Problem problem = createProblemBuilder(status, problemType, detail)
-	            .userMessage(detail)
-	            .userMessage("Você não possui permissão para executar essa operação.")
-	            .build();
-
-	    return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
-	}
 	
 	@Override
 	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, 
@@ -189,6 +152,71 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 	
 	
+	
+	private ResponseEntity<Object> handlePropertyBinding(PropertyBindingException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		
+		String path = joinPath(ex.getPath());
+		
+		ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSIVEL;
+		String detail = String.format("A propriedade '%s' não existe. "
+				+ "Corrija ou remova essa propriedade e tente novamente.", path);
+
+		Problem problem = createProblemBuilder(status, problemType, detail)
+				.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
+				.build();
+		
+		return handleExceptionInternal(ex, problem, headers, status, request);
+	}
+	
+	private ResponseEntity<Object> handleInvalidFormat(InvalidFormatException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		String path = joinPath(ex.getPath());
+		
+		ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSIVEL;
+		String detail = String.format("A propriedade '%s' recebeu o valor '%s', "
+				+ "que é de um tipo inválido. Corrija e informe um valor compatível com o tipo %s.",
+				path, ex.getValue(), ex.getTargetType().getSimpleName());
+		
+		Problem problem = createProblemBuilder(status, problemType, detail)
+				.userMessage(MSG_ERRO_GENERICA_USUARIO_FINAL)
+				.build();
+		
+		return handleExceptionInternal(ex, problem, headers, status, request);
+	}
+
+	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ResponseEntity<?> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException ex,
+			WebRequest request) {
+		
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		ProblemType problemType = ProblemType.RECURSO_NAO_ENCONTRADO;
+		String detail = ex.getMessage();
+		
+		Problem problem = createProblemBuilder(status, problemType, detail)
+				.userMessage(detail)
+				.build();
+		
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+	}
+	
+	
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity<?> handleNegocio(BusinessException ex, WebRequest request) {
+
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		ProblemType problemType = ProblemType.ERRO_NEGOCIO;
+		String detail = ex.getMessage();
+		
+		Problem problem = createProblemBuilder(status, problemType, detail)
+				.userMessage(detail)
+				.build();
+		
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+	}
+	
+	
 	@Override
 	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
@@ -221,6 +249,12 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 			.type(problemType.getUri())
 			.title(problemType.getTitle())
 			.detail(detail);
+	}
+
+	private String joinPath(List<Reference> references) {
+		return references.stream()
+			.map(ref -> ref.getFieldName())
+			.collect(Collectors.joining("."));
 	}
 	
 }
