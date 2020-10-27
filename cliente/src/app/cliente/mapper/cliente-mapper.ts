@@ -1,6 +1,6 @@
 import { ClienteModel } from './../model/cliente-model';
 import { ClienteEntity } from './../entity/cliente-entity';
-import { Mapper } from './../../../app/base/mapper';
+import { Mapper } from '../../../app/base/mapper';
 
 export class ClienteMapper extends Mapper<ClienteEntity, ClienteModel> {
 
@@ -14,7 +14,8 @@ export class ClienteMapper extends Mapper<ClienteEntity, ClienteModel> {
             cpf: param.cpf,
             rg: param.rg,
             email: param.email,
-            endereco: param.endereco
+            endereco: param.endereco,
+            foto: param.foto
         };
     }
 
@@ -28,7 +29,8 @@ export class ClienteMapper extends Mapper<ClienteEntity, ClienteModel> {
             cpf: param.cpf,
             rg: param.rg,
             email: param.email,
-            endereco: param.endereco
+            endereco: param.endereco,
+            foto: param.foto
         };
     }
 }

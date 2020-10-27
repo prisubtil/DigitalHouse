@@ -1,17 +1,13 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5 pt-5" style="position: relative;">
 
-    <p-messages [(value)]="mensagem" 
-        [enableService]="false" 
-        [showTransitionOptions]="'1000ms'" 
-        [hideTransitionOptions]="'1000ms'">
-    </p-messages>
     <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
         <div class="form-row">
-            <div class="form-group col-md-12">
+            <input type="hidden" formControlName="id"/>
+            <div class="form-group col-md-6">
                 <label for="nome">Nome</label>
                 <input id="nome" type="text" class="form-control" formControlName="nome" />
             </div>
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
                 <label for="sobrenome">Sobrenome</label>
                 <input 
                 type="text" 
@@ -35,6 +31,20 @@
                     Sobrenome excedeu a quantidade máxima de 10 caracteres!
                 </div>
             </div>
+            
+        </div>
+        <div class="form-group" >
+            <label for="nome">Foto</label>
+            <p-fileUpload #upload
+                name="demo[]" 
+                chooseLabel="Escolher uma foto" 
+                [showUploadButton]="false"
+                [showCancelButton]="false"
+                (onSelect)="enviarImagem($event)"
+                [multiple]="false" 
+                accept="image/*"
+                maxFileSize="1000000">               
+            </p-fileUpload>
         </div>
         <div class="form-group">
             <label for="telefone">Telefone</label>
@@ -97,6 +107,7 @@
             <div class="form-group col-md-6">
                 <label for="">Cidade</label>
                 <p-dropdown 
+                    [disabled]="!formulario.value.estado"
                     [options]="cidades" 
                     formControlName="cidade" 
                     [filter]="true" 
@@ -107,5 +118,7 @@
         <button type="submit" class="btn"
             [class]="operacao ? 'btn-primary' : 'btn-success'">{{ operacao ? "Cadastrar" : "Atualizar" }}
         </button>
+        <br><br>
+        <a routerLink="/cliente">Voltar para a pesquisa</a>
     </form>
 </div>
